@@ -1,20 +1,47 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
+  "plugins": ["@nx", "@typescript-eslint/eslint-plugin"],
+  "rules": {
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ]
+  },
+  "extends": [
+    "plugin:@nx/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        "max-len": ["error", { "code": 120 }],
         "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,
             "allow": [],
+            "allowCircularSelfDependency": true,
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "sourceTag": "scope:client",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:client"]
+              },
+              {
+                "sourceTag": "scope:server-shared",
+                "onlyDependOnLibsWithTags": ["scope:server-shared"]
+              },
+              {
+                "sourceTag": "scope:server",
+                "onlyDependOnLibsWithTags": ["scope:server-shared", "scope:server", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
               }
             ]
           }
@@ -23,8 +50,17 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
-      "rules": {}
+      "rules": {},
+      "settings": {},
+      "parserOptions": {},
+      "parser": "",
+      "plugins": [],
+      "globals": {},
+      "excludedFiles":  [],
+      "overrides": [],
+      "env": {},
+      "processor": "",
+      "ecmaFeatures": {}
     },
     {
       "files": ["*.js", "*.jsx"],

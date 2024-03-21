@@ -1,0 +1,24 @@
+{
+  "name": "bar-catalogue",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/bar-map-backend/bar-catalogue/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "bar-catalogue:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "bar-catalogue:build:development"
+        },
+        "production": {
+          "buildTarget": "bar-catalogue:build:production"
+        }
+      }
+    }
+  },
+  "tags": ["scope:server"]
+}

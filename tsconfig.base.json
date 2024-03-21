@@ -13,8 +13,16 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
+    "baseUrl": "./",
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@bar-map/graphql-types": ["libs/graphql-types/src/index.ts"],
+      "@bar-map/shared": ["libs/backend/shared/src/index.ts"],
+      "@bar-map/shared/*": ["libs/backend/shared/src/*"],
+      "@catalogue/*": ["./apps/backend/bar-catalogue/src/*"]
+    }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp",
+    "apps/backend/bar-catalogue/compose.yaml"
+  ]
 }
