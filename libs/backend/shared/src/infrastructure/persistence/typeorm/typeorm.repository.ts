@@ -2,29 +2,26 @@ import {
   Repository,
   SearchOptions,
 } from '@bar-map/shared/application/ports/repository.abstract';
-import { FindOptionsWhere, ObjectId, Repository as ORMRepository } from 'typeorm';
-import { Mapper } from '@bar-map/shared/infrastructure/persistence/mappers/mapper';
+import { FindOptionsWhere, Repository as ORMRepository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { TypeORMId } from './types';
 
 @Injectable()
-export class TypeORMRepository<Entity, Model extends { id: ID }, ID extends string | number | Date | ObjectId | FindOptionsWhere<Model> | string[] | number[] | Date[] | ObjectId[] = number>
-  implements Repository<Entity, ID>
+export class TypeORMRepository<
+  Model extends { id: TypeORMId<Model> },
+  ID extends Model['id'] = Model['id'],
+> implements Repository<Model, ID>
 {
-  constructor(
-    protected readonly repository: ORMRepository<Model>,
-    protected readonly mapper: Mapper<Entity, Model>
-  ) {}
+  constructor(protected readonly repository: ORMRepository<Model>) {}
 
-  findOne: (options?: SearchOptions) => Promise<Entity>;
+  findOne: (options?: SearchOptions) => Promise<Model>;
 
   async findById(id: ID) {
-    const result = await this.repository.findOne({
+    return await this.repository.findOne({
       where: {
         id,
-      } as FindOptionsWhere<Model>,
+      } as unknown as FindOptionsWhere<Model>,
     });
-
-    return result ? this.mapper.toDomain(result) : null;
   }
 
   async deleteMany() {
@@ -32,25 +29,16 @@ export class TypeORMRepository<Entity, Model extends { id: ID }, ID extends stri
   }
 
   async findAll() {
-    const result = await this.repository.find();
-
-    return result.map(this.mapper.toDomain);
+    return await this.repository.find();
   }
 
-  async insert(entity: Entity) {
-    const mappedEntity = this.mapper.toPersistence(entity);
-    const result = await this.repository.save(mappedEntity);
-
-    return this.mapper.toDomain(result);
+  async insert(entity: Model) {
+    return await this.repository.save(entity);
   }
 
-  async updateById(id: ID, entity: Entity) {
-    const mappedEntity = this.mapper.toPersistence(entity);
-    mappedEntity.id = id;
-
-    const result = await this.repository.save(mappedEntity);
-
-    return this.mapper.toDomain(result);
+  async updateById(id: ID, entity: Model) {
+    entity.id = id;
+    return await this.repository.save(entity);
   }
 
   async deleteById(id: ID) {

@@ -1,0 +1,73 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type State {
+  isoAlphaCode2: CountryCode!
+  name: String!
+}
+
+"""A country code as defined by ISO 3166-1 alpha-2"""
+scalar CountryCode
+
+type BarTypeCategory {
+  id: ID!
+  name: String!
+  barTypeList: [BarType!]!
+}
+
+type BarType {
+  id: ID!
+  name: String!
+  barList: [Bar!]!
+  category: BarTypeCategory!
+}
+
+type Franchise {
+  id: ID!
+  name: String!
+  barList: [Bar!]!
+}
+
+type Bar {
+  id: ID!
+  name: String!
+  description: String!
+  typeList: [BarType!]!
+  franchise: Franchise!
+  outletList: [BarOutlet!]!
+  logoUrl: String
+  outlets: [BarOutlet!]!
+  types: [BarType!]!
+}
+
+type BarOutlet {
+  id: ID!
+  phoneNumber: PhoneNumber
+  address: Address!
+  pictureUrl: String
+  bar: Bar!
+}
+
+"""
+A field whose value conforms to the standard E.164 format as specified in: https://en.wikipedia.org/wiki/E.164. Basically this is +17895551234.
+"""
+scalar PhoneNumber
+
+type Point {
+  coordinates: [Float!]!
+}
+
+type Address {
+  id: ID!
+  location: Point!
+  street: String!
+  city: String!
+  state: State!
+  barOutletList: [BarOutlet!]!
+}
+
+type Query {
+  bars: [Bar!]!
+  bar(id: ID!): Bar!
+}

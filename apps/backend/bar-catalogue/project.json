@@ -8,7 +8,8 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "bar-catalogue:build"
+        "buildTarget": "bar-catalogue:build",
+        "port": 9229
       },
       "configurations": {
         "development": {

@@ -12,7 +12,14 @@ module.exports = {
       main: './src/main.ts',
       tsConfig: './tsconfig.app.json',
       optimization: false,
+      sourceMap: true,
       outputHashing: 'none',
+      transformers: [
+        {
+          name: '@nestjs/graphql/plugin',
+          options: ['.entity.ts', '.value-object.ts'],
+        },
+      ],
     }),
   ],
 };

@@ -3,7 +3,18 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/backend/shared/src",
   "projectType": "library",
-  "tags": ["scope:server-shared"],
-  "// targets": "to see all targets run: nx show project shared --web",
-  "targets": {}
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/backend/shared",
+        "tsConfig": "libs/backend/shared/tsconfig.lib.json",
+        "packageJson": "libs/backend/shared/package.json",
+        "main": "libs/backend/shared/src/index.ts",
+        "assets": ["libs/backend/shared/*.md"]
+      }
+    }
+  },
+  "tags": ["server", "server-shared"]
 }

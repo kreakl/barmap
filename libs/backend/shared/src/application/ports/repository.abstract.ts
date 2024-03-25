@@ -17,7 +17,7 @@ export class Pageable {
   constructor(pageable: Pageable) {
     if (!pageable.pageNumber) {
       throw new IllegalArgumentException(
-        'A value for the page number is missing'
+        'A value for the page number is missing',
       );
     }
     if (!pageable.offset) {

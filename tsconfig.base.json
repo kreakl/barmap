@@ -19,10 +19,9 @@
       "@bar-map/graphql-types": ["libs/graphql-types/src/index.ts"],
       "@bar-map/shared": ["libs/backend/shared/src/index.ts"],
       "@bar-map/shared/*": ["libs/backend/shared/src/*"],
-      "@catalogue/*": ["./apps/backend/bar-catalogue/src/*"]
+      "@catalogue/*": ["apps/backend/bar-catalogue/src/*"],
+      "@catalogue/test/*": ["apps/backend/bar-catalogue/tests/*"]
     }
   },
-  "exclude": ["node_modules", "tmp",
-    "apps/backend/bar-catalogue/compose.yaml"
-  ]
+  "exclude": ["node_modules", "tmp", "apps/backend/bar-catalogue/compose.yaml"]
 }
