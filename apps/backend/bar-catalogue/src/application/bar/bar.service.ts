@@ -26,17 +26,17 @@ export class BarService {
         id: true,
       },
       relations: [
-        'outletList',
-        'outletList.address',
-        'outletList.address.state',
-        'outletList.photo',
+        'outlets',
+        'outlets.address',
+        'outlets.address.state',
+        'outlets.photos',
       ],
       where: {
         id: In(barIds),
       },
     });
 
-    return barsWithOutlets.map((bar) => bar.outletList);
+    return barsWithOutlets.map((bar) => bar.outlets);
   }
 
   async findBarTypesByBatch(barIds: readonly number[]) {
@@ -44,13 +44,13 @@ export class BarService {
       select: {
         id: true,
       },
-      relations: ['typeList', 'typeList.category'],
+      relations: ['types', 'types.category'],
       where: {
         id: In(barIds),
       },
     });
 
-    return barsWithTypes.map((bar) => bar.typeList);
+    return barsWithTypes.map((bar) => bar.types);
   }
 
   async findBarFranchiseByBatch(barIds: readonly number[]) {

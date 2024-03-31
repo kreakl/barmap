@@ -13,20 +13,20 @@ scalar CountryCode
 type BarTypeCategory {
   id: ID!
   name: String!
-  barTypeList: [BarType!]!
+  barTypes: [BarType!]!
 }
 
 type BarType {
   id: ID!
   name: String!
-  barList: [Bar!]!
+  bars: [Bar!]!
   category: BarTypeCategory!
 }
 
 type Franchise {
   id: ID!
   name: String!
-  barList: [Bar!]!
+  bars: [Bar!]!
 }
 
 type Bar {
@@ -34,12 +34,10 @@ type Bar {
   averageBillSum: PositiveFloat
   name: String!
   description: String!
-  typeList: [BarType!]!
-  franchise: Franchise!
-  outletList: [BarOutlet!]!
-  logoUrl: String
-  outlets: [BarOutlet!]!
   types: [BarType!]!
+  franchise: Franchise!
+  outlets: [BarOutlet!]!
+  logoUrl: String
 }
 
 """Floats that will have a value greater than 0."""
@@ -53,7 +51,7 @@ type Photo {
 
 type BarOutlet {
   id: ID!
-  photoList: [Photo]
+  photos: [Photo!]!
   phoneNumber: PhoneNumber!
   address: Address!
   bar: Bar!
@@ -75,10 +73,12 @@ type Address {
   street: String!
   city: String!
   state: State!
-  barOutletList: [BarOutlet!]!
+  barOutlets: [BarOutlet!]!
 }
 
 type Query {
   bars: [Bar!]!
   bar(id: ID!): Bar!
+  outlets: [BarOutlet!]!
+  outlet(id: ID!): BarOutlet!
 }

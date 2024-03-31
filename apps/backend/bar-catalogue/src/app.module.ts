@@ -10,6 +10,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as process from 'process';
 import { AppConfig } from '@catalogue/config';
 import { TestModule } from '@catalogue/infrastructure/tests/test.module';
+import { BarOutletModule } from '@catalogue/application/bar-outlet/bar-outlet.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { TestModule } from '@catalogue/infrastructure/tests/test.module';
       imports: [ConfigModule],
     }),
     BarModule,
+    BarOutletModule,
   ],
 })
 export class AppModule {}

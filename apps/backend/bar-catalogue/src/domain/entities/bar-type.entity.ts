@@ -20,10 +20,10 @@ export class BarType {
   @Column()
   name: string;
 
-  @ManyToMany(() => Bar, (bar) => bar.typeList)
-  barList: Bar[];
+  @ManyToMany(() => Bar, (bar) => bar.types)
+  bars: Bar[];
 
-  @ManyToOne(() => BarTypeCategory, (category) => category.barTypeList, {
+  @ManyToOne(() => BarTypeCategory, (category) => category.barTypes, {
     onDelete: 'CASCADE',
     nullable: false,
   })

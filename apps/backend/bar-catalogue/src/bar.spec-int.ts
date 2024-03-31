@@ -36,7 +36,7 @@ describe('GraphQL', () => {
             bars {
               name
               description
-              typeList {
+              types {
                 id
                 name
               }
@@ -44,7 +44,7 @@ describe('GraphQL', () => {
                 id
                 name
               }
-              outletList {
+              outlets {
                 id
                 phoneNumber
                 address

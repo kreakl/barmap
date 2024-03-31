@@ -1,5 +1,6 @@
 {
   "name": "@bar-map/source",
+  "sideEffects": false,
   "version": "0.0.0",
   "license": "MIT",
   "private": true,

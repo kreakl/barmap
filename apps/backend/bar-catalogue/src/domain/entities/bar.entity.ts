@@ -27,11 +27,11 @@ export class Bar {
   @Column('text')
   description: string;
 
-  @ManyToMany(() => BarType, (type) => type.barList)
+  @ManyToMany(() => BarType, (type) => type.bars)
   @JoinTable()
-  typeList: BarType[];
+  types: BarType[];
 
-  @ManyToOne(() => Franchise, (franchise) => franchise.barList, {
+  @ManyToOne(() => Franchise, (franchise) => franchise.bars, {
     onDelete: 'CASCADE',
     nullable: false,
   })
@@ -39,7 +39,7 @@ export class Bar {
   franchise: Franchise;
 
   @OneToMany(() => BarOutlet, (outlet) => outlet.bar)
-  outletList: BarOutlet[];
+  outlets: BarOutlet[];
 
   @Column('text', {
     nullable: true,

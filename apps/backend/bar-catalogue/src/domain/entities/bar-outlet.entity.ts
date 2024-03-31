@@ -19,7 +19,7 @@ export class BarOutlet {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Address, (address) => address.barOutletList, {
+  @ManyToOne(() => Address, (address) => address.barOutlets, {
     nullable: false,
     onDelete: 'RESTRICT',
   })
@@ -27,9 +27,9 @@ export class BarOutlet {
 
   @Field(() => [Photo], { nullable: 'itemsAndList' })
   @OneToMany(() => Photo, (photo) => photo.outlet)
-  photoList?: Photo[];
+  photos?: Photo[];
 
-  @ManyToOne(() => Bar, (bar) => bar.outletList, {
+  @ManyToOne(() => Bar, (bar) => bar.outlets, {
     onDelete: 'CASCADE',
     nullable: false,
   })

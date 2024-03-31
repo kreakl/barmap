@@ -13,5 +13,5 @@ export class BarTypeCategory {
   name: string;
 
   @OneToMany(() => BarType, (type) => type.category)
-  barTypeList: BarType[];
+  barTypes: BarType[];
 }

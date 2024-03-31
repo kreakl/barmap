@@ -39,5 +39,5 @@ export class Address {
   state: State;
 
   @OneToMany(() => BarOutlet, (bar) => bar.address)
-  barOutletList: BarOutlet[];
+  barOutlets: BarOutlet[];
 }

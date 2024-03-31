@@ -21,7 +21,7 @@ export class BarOutletService {
   }
 
   async findOutletAddressByBatch(outletIds: readonly number[]) {
-    const outletsWithAddresses = await this.outletRepository.find({
+    const outletsWithAddress = await this.outletRepository.find({
       select: {
         id: true,
       },
@@ -31,6 +31,34 @@ export class BarOutletService {
       },
     });
 
-    return outletsWithAddresses.map((outlet) => outlet.address);
+    return outletsWithAddress.map((outlet) => outlet.address);
+  }
+
+  async findOutletBarByBatch(outletIds: readonly number[]) {
+    const outletsWithBar = await this.outletRepository.find({
+      select: {
+        id: true,
+      },
+      relations: ['bar', 'bar.types', 'bar.franchise'],
+      where: {
+        id: In(outletIds),
+      },
+    });
+
+    return outletsWithBar.map((outlet) => outlet.bar);
+  }
+
+  async findOutletPhotosByBatch(outletIds: readonly number[]) {
+    const outletPhotos = await this.outletRepository.find({
+      select: {
+        id: true,
+      },
+      relations: ['photos'],
+      where: {
+        id: In(outletIds),
+      },
+    });
+
+    return outletPhotos.map((outlet) => outlet.photos);
   }
 }

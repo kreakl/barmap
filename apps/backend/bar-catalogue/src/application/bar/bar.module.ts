@@ -8,8 +8,9 @@ import {
   BarOutlet,
   BarType,
   BarTypeCategory,
-  Franchise, Photo,
-  State
+  Franchise,
+  Photo,
+  State,
 } from '@catalogue/domain/entities';
 import {
   FranchiseByBarLoader,

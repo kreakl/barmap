@@ -13,5 +13,5 @@ export class Franchise {
   name: string;
 
   @OneToMany(() => Bar, (bar) => bar.franchise)
-  barList: Bar[];
+  bars: Bar[];
 }

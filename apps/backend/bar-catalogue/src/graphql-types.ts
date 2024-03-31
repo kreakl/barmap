@@ -63,9 +63,10 @@ export class BarOutlet {
     __typename?: 'BarOutlet';
     id: number;
     photoList?: Nullable<Nullable<Photo>[]>;
-    phoneNumber?: Nullable<PhoneNumber>;
+    phoneNumber: PhoneNumber;
     address: Address;
     bar: Bar;
+    description: string;
 }
 
 export class Point {
