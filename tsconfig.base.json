@@ -20,7 +20,8 @@
       "@bar-map/shared": ["libs/backend/shared/src/index.ts"],
       "@bar-map/shared/*": ["libs/backend/shared/src/*"],
       "@catalogue/*": ["apps/backend/bar-catalogue/src/*"],
-      "@catalogue/test/*": ["apps/backend/bar-catalogue/tests/*"]
+      "@catalogue/test/*": ["apps/backend/bar-catalogue/tests/*"],
+      "@front-main/*": ["apps/bar-map-frontend/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp", "apps/backend/bar-catalogue/compose.yaml"]

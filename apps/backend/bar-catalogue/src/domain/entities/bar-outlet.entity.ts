@@ -3,12 +3,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Address } from './address.entity';
 import { Bar } from './bar.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { GraphQLPhoneNumber } from 'graphql-scalars';
+import { Photo } from '@catalogue/domain/entities/photo.entity';
 
 @ObjectType()
 @Entity('bar_outlets')
@@ -23,10 +25,9 @@ export class BarOutlet {
   })
   address: Address;
 
-  @Column('text', {
-    nullable: true,
-  })
-  pictureUrl?: string;
+  @Field(() => [Photo], { nullable: 'itemsAndList' })
+  @OneToMany(() => Photo, (photo) => photo.outlet)
+  photoList?: Photo[];
 
   @ManyToOne(() => Bar, (bar) => bar.outletList, {
     onDelete: 'CASCADE',
@@ -36,6 +37,9 @@ export class BarOutlet {
   bar: Bar;
 
   @Field(() => GraphQLPhoneNumber)
-  @Column('varchar', { length: 12, nullable: true })
-  phoneNumber?: string;
+  @Column('varchar', { length: 12 })
+  phoneNumber: string;
+
+  @Column('text', {})
+  description: string;
 }

@@ -8,7 +8,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { GraphQLCountryCode, GraphQLPhoneNumber } from 'graphql-scalars'
+import { GraphQLCountryCode, GraphQLPhoneNumber, GraphQLPositiveFloat } from 'graphql-scalars'
 
 export class State {
     __typename?: 'State';
@@ -41,6 +41,7 @@ export class Franchise {
 export class Bar {
     __typename?: 'Bar';
     id: number;
+    averageBillSum?: Nullable<PositiveFloat>;
     name: string;
     description: string;
     typeList: BarType[];
@@ -51,12 +52,19 @@ export class Bar {
     types: BarType[];
 }
 
+export class Photo {
+    __typename?: 'Photo';
+    id: number;
+    url: string;
+    outlet: BarOutlet;
+}
+
 export class BarOutlet {
     __typename?: 'BarOutlet';
     id: number;
+    photoList?: Nullable<Nullable<Photo>[]>;
     phoneNumber?: Nullable<PhoneNumber>;
     address: Address;
-    pictureUrl?: Nullable<string>;
     bar: Bar;
 }
 
@@ -82,5 +90,6 @@ export abstract class IQuery {
 }
 
 export type CountryCode = typeof GraphQLCountryCode;
+export type PositiveFloat = typeof GraphQLPositiveFloat;
 export type PhoneNumber = typeof GraphQLPhoneNumber;
 type Nullable<T> = T | null;

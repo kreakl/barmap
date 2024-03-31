@@ -12,6 +12,7 @@ import { BarType } from './bar-type.entity';
 import { Franchise } from './franchise.entity';
 import { BarOutlet } from './bar-outlet.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { GraphQLPositiveFloat } from 'graphql-scalars';
 
 @ObjectType()
 @Entity('bars')
@@ -20,7 +21,6 @@ export class Bar {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field({ nullable: false })
   @Column('varchar', { length: 100 })
   name: string;
 
@@ -45,4 +45,10 @@ export class Bar {
     nullable: true,
   })
   logoUrl?: string;
+
+  @Field(() => GraphQLPositiveFloat)
+  @Column('integer', {
+    nullable: true,
+  })
+  averageBillSum?: number;
 }

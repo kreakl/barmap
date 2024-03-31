@@ -45,3 +45,6 @@ Thumbs.db
 out
 
 .development.env
+
+
+storybook-static

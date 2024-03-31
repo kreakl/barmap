@@ -15,7 +15,8 @@ definitionsFactory.generate({
   customScalarTypeMapping: {
     CountryCode: 'typeof GraphQLCountryCode',
     PhoneNumber: 'typeof GraphQLPhoneNumber',
+    PositiveFloat: 'typeof GraphQLPositiveFloat',
   },
   additionalHeader:
-    "import { GraphQLCountryCode, GraphQLPhoneNumber } from 'graphql-scalars'",
+    "import { GraphQLCountryCode, GraphQLPhoneNumber, GraphQLPositiveFloat } from 'graphql-scalars'",
 });

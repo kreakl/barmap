@@ -31,6 +31,7 @@ type Franchise {
 
 type Bar {
   id: ID!
+  averageBillSum: PositiveFloat
   name: String!
   description: String!
   typeList: [BarType!]!
@@ -41,12 +42,22 @@ type Bar {
   types: [BarType!]!
 }
 
+"""Floats that will have a value greater than 0."""
+scalar PositiveFloat
+
+type Photo {
+  id: ID!
+  url: String!
+  outlet: BarOutlet!
+}
+
 type BarOutlet {
   id: ID!
-  phoneNumber: PhoneNumber
+  photoList: [Photo]
+  phoneNumber: PhoneNumber!
   address: Address!
-  pictureUrl: String
   bar: Bar!
+  description: String!
 }
 
 """

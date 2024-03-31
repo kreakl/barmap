@@ -19,13 +19,23 @@
     "types": ["jest", "node"]
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx",
     "../../apps/bar-map-frontend/.next/types/**/*.ts",
     "../../dist/apps/bar-map-frontend/.next/types/**/*.ts",
     "next-env.d.ts"
   ],
-  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
+  "exclude": [
+    "node_modules",
+    "jest.config.ts",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.storybook.json"
+    }
+  ]
 }

@@ -29,6 +29,7 @@ export class BarService {
         'outletList',
         'outletList.address',
         'outletList.address.state',
+        'outletList.photo',
       ],
       where: {
         id: In(barIds),

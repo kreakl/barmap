@@ -2,10 +2,14 @@
   "extends": [
     "plugin:@nx/react-typescript",
     "next",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:storybook/recommended",
+    "@feature-sliced/eslint-config/rules/layers-slices",
     "next/core-web-vitals",
     "../../.eslintrc.json"
   ],
-  "ignorePatterns": ["!**/*", ".next/**/*"],
+  "ignorePatterns": ["!**/*", ".next/**/*", "storybook-static"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -13,12 +17,22 @@
         "@next/next/no-html-link-for-pages": [
           "error",
           "apps/bar-map-frontend/pages"
-        ]
+        ],
+        "import/no-extraneous-dependencies": "off",
+        "@typescript-eslint/naming-convention": "off",
+        "jsx-a11y/alt-text": "off"
       }
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "rules": {}
+      "rules": {},
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": [
+          "apps/bar-map-frontend/tsconfig.json",
+          "apps/bar-map-frontend/tsconfig.storybook.json"
+        ]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],

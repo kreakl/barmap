@@ -8,8 +8,8 @@ import {
   BarOutlet,
   BarType,
   BarTypeCategory,
-  Franchise,
-  State,
+  Franchise, Photo,
+  State
 } from '@catalogue/domain/entities';
 import {
   FranchiseByBarLoader,
@@ -27,6 +27,7 @@ import {
       BarType,
       BarTypeCategory,
       State,
+      Photo,
     ]),
   ],
   providers: [
