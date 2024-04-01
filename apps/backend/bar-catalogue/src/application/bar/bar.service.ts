@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { In, Repository } from 'typeorm';
-import { Bar } from '../../domain/entities';
+import { Bar, BarOutlet, BarType, Franchise } from '../../domain/entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginatedDto, PaginatedQueryParametersDto } from '@bar-map/shared';
 
@@ -58,7 +58,11 @@ export class BarService {
       },
     });
 
-    return this.mapEntriesToIds(barsWithOutlets, barIds, 'outlets');
+    return this.mapEntriesToIds(
+      barsWithOutlets,
+      barIds,
+      'outlets',
+    ) as BarOutlet[][];
   }
 
   async findBarTypesByBatch(barIds: readonly number[]) {
@@ -72,7 +76,7 @@ export class BarService {
       },
     });
 
-    return this.mapEntriesToIds(barsWithTypes, barIds, 'types');
+    return this.mapEntriesToIds(barsWithTypes, barIds, 'types') as BarType[][];
   }
 
   async findBarFranchiseByBatch(barIds: readonly number[]) {
@@ -86,6 +90,10 @@ export class BarService {
       },
     });
 
-    return this.mapEntriesToIds(barsWithFranchise, barIds, 'franchise');
+    return this.mapEntriesToIds(
+      barsWithFranchise,
+      barIds,
+      'franchise',
+    ) as Franchise[];
   }
 }

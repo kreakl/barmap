@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BarOutlet } from '@catalogue/domain/entities';
+import { Address, Bar, BarOutlet, Photo } from '@catalogue/domain/entities';
 import { In, Repository } from 'typeorm';
 
 @Injectable()
@@ -41,7 +41,11 @@ export class BarOutletService {
       },
     });
 
-    return this.mapEntriesToIds(outletsWithAddress, outletIds, 'address');
+    return this.mapEntriesToIds(
+      outletsWithAddress,
+      outletIds,
+      'address',
+    ) as Address[];
   }
 
   async findOutletBarByBatch(outletIds: readonly number[]) {
@@ -55,7 +59,7 @@ export class BarOutletService {
       },
     });
 
-    return this.mapEntriesToIds(outletsWithBar, outletIds, 'bar');
+    return this.mapEntriesToIds(outletsWithBar, outletIds, 'bar') as Bar[];
   }
 
   async findOutletPhotosByBatch(outletIds: readonly number[]) {
@@ -69,6 +73,6 @@ export class BarOutletService {
       },
     });
 
-    return this.mapEntriesToIds(outletPhotos, outletIds, 'photos');
+    return this.mapEntriesToIds(outletPhotos, outletIds, 'photos') as Photo[][];
   }
 }
