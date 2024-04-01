@@ -4,7 +4,7 @@ import {
   Address,
   Bar,
   BarOutlet,
-  BarType, BarTypeCategory,
+  BarType,
   Franchise,
   Photo,
   State,
