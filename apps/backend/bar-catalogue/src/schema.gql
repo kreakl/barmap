@@ -87,8 +87,13 @@ type PaginatedBarDto {
 }
 
 type Query {
-  bars: PaginatedBarDto!
+  bars(order: Order! = ASC, page: Int! = 1, pageSize: Int! = 10): PaginatedBarDto!
   bar(id: ID!): Bar!
   outlets: [BarOutlet!]!
   outlet(id: ID!): BarOutlet!
+}
+
+enum Order {
+  ASC
+  DESC
 }

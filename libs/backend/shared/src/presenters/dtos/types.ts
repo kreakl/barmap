@@ -12,7 +12,7 @@ export interface IPaginatedType<T> {
 
   readonly pageSize: number;
 
-  readonly itemCount: number;
+  readonly totalCount: number;
 
   readonly pageCount: number;
 

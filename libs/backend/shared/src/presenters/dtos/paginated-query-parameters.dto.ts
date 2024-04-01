@@ -1,22 +1,32 @@
-import { Type } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import { IsEnum, IsInt, IsOptional, Max, Min } from 'class-validator';
+import { ArgsType, Field, Int, registerEnumType } from '@nestjs/graphql';
 
 export enum Order {
   ASC = 'ASC',
   DESC = 'DESC',
 }
 
+registerEnumType(Order, {
+  name: 'Order',
+});
+
+// TODO: Make class not tied to concrete representation(REST, GRAPHQL)
+@ArgsType()
 export class PaginatedQueryParametersDto {
+  @Field(() => Order, { defaultValue: Order.ASC })
   @IsEnum(Order)
   @IsOptional()
   readonly order?: Order = Order.ASC;
 
+  @Field(() => Int, { defaultValue: 1 })
   @Type(() => Number)
   @IsInt()
   @Min(1)
   @IsOptional()
   readonly page?: number = 1;
 
+  @Field(() => Int, { defaultValue: 10 })
   @Type(() => Number)
   @IsInt()
   @Min(1)
@@ -24,6 +34,7 @@ export class PaginatedQueryParametersDto {
   @IsOptional()
   readonly pageSize?: number = 10;
 
+  @Expose()
   get skip(): number {
     return ((this.page ?? 1) - 1) * (this.pageSize ?? 10);
   }

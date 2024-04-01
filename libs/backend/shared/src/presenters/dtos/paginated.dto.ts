@@ -12,7 +12,7 @@ export class PaginatedDto<T> implements IPaginatedType<T> {
 
   readonly pageSize: number;
 
-  readonly itemCount: number;
+  readonly totalCount: number;
 
   readonly pageCount: number;
 
@@ -27,8 +27,8 @@ export class PaginatedDto<T> implements IPaginatedType<T> {
     this.data = data;
     this.page = paginatedQueryDto.page ?? 1;
     this.pageSize = paginatedQueryDto.pageSize ?? 10;
-    this.itemCount = itemCount;
-    this.pageCount = Math.ceil(this.itemCount / this.pageSize);
+    this.totalCount = itemCount;
+    this.pageCount = Math.ceil(this.totalCount / this.pageSize);
     this.hasPreviousPage = this.page > 1;
     this.hasNextPage = this.page < this.pageCount;
   }

@@ -17,7 +17,7 @@ module.exports = {
       transformers: [
         {
           name: '@nestjs/graphql/plugin',
-          options: ['.entity.ts', '.value-object.ts'],
+          options: ['.entity.ts', '.value-object.ts', '.dto.ts'],
         },
       ],
     }),
