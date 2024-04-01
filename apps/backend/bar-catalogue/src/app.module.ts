@@ -27,6 +27,9 @@ import { BarOutletModule } from '@catalogue/application/bar-outlet/bar-outlet.mo
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
+      buildSchemaOptions: {
+        numberScalarMode: 'integer',
+      },
     }),
     TypeOrmModule.forRootAsync({
       useFactory: (config: ConfigService<AppConfig>) => ({

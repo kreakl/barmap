@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { In, Repository } from 'typeorm';
 import { Bar } from '../../domain/entities';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PaginatedDto, PaginatedQueryParametersDto } from '@bar-map/shared';
 
 @Injectable()
 export class BarService {
@@ -10,8 +11,19 @@ export class BarService {
     private readonly barRepository: Repository<Bar>,
   ) {}
 
-  async findAll() {
-    return this.barRepository.find();
+  async findAll(
+    paginatedQueryDto: PaginatedQueryParametersDto = new PaginatedQueryParametersDto(),
+  ) {
+    const { skip, pageSize, order } = paginatedQueryDto;
+    const [bars, itemCount] = await this.barRepository.findAndCount({
+      skip,
+      take: pageSize,
+      order: {
+        id: order,
+      },
+    });
+
+    return new PaginatedDto(bars, { itemCount, paginatedQueryDto });
   }
 
   async findById(id: number) {

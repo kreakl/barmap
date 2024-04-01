@@ -6,7 +6,7 @@ export enum Order {
   DESC = 'DESC',
 }
 
-export class PaginatedQueryDto {
+export class PaginatedQueryParametersDto {
   @IsEnum(Order)
   @IsOptional()
   readonly order?: Order = Order.ASC;
