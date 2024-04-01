@@ -35,7 +35,9 @@ export class BarResolver {
 
   @Query(() => PaginatedBarDto, { name: 'bars' })
   async findAll(@Args() queryParams: PaginatedQueryParams) {
-    return new PaginatedBarDto(await this.barService.findAll(queryParams));
+    const paginatedBars = await this.barService.findAll(queryParams);
+
+    return new PaginatedBarDto(paginatedBars);
   }
 
   @Query(() => Bar, { name: 'bar' })

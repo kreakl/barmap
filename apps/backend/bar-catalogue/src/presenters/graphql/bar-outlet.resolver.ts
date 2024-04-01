@@ -14,6 +14,10 @@ import {
 import { Address, Bar, BarOutlet, Photo } from '@catalogue/domain/entities';
 import { BarOutletService } from '@catalogue/application/bar-outlet/bar-outlet.service';
 import { ParseIntPipe } from '@nestjs/common';
+import {
+  PaginatedBarOutletDto,
+  PaginatedQueryParams,
+} from '@catalogue/presenters/graphql/dto';
 
 @Resolver(() => BarOutlet)
 export class BarOutletResolver {
@@ -24,9 +28,11 @@ export class BarOutletResolver {
     private readonly outletService: BarOutletService,
   ) {}
 
-  @Query(() => [BarOutlet], { name: 'outlets' })
-  async findAll() {
-    return this.outletService.findAll();
+  @Query(() => PaginatedBarOutletDto, { name: 'outlets' })
+  async findAll(@Args() queryParams: PaginatedQueryParams) {
+    const paginatedOutlets = await this.outletService.findAll(queryParams);
+
+    return new PaginatedBarOutletDto(paginatedOutlets);
   }
 
   @Query(() => BarOutlet, { name: 'outlet' })

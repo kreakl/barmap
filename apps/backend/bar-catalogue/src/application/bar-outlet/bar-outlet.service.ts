@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Address, Bar, BarOutlet, Photo } from '@catalogue/domain/entities';
 import { In, Repository } from 'typeorm';
+import { PaginatedDto, PaginatedQueryParametersDto } from '@bar-map/shared';
 
 @Injectable()
 export class BarOutletService {
@@ -10,8 +11,19 @@ export class BarOutletService {
     private readonly outletRepository: Repository<BarOutlet>,
   ) {}
 
-  async findAll() {
-    return this.outletRepository.find();
+  async findAll(
+    paginatedQueryDto: PaginatedQueryParametersDto = new PaginatedQueryParametersDto(),
+  ) {
+    const { skip, pageSize, order } = paginatedQueryDto;
+    const [bars, itemCount] = await this.outletRepository.findAndCount({
+      skip,
+      take: pageSize,
+      order: {
+        id: order,
+      },
+    });
+
+    return new PaginatedDto(bars, { itemCount, paginatedQueryDto });
   }
 
   async findById(id: number) {
