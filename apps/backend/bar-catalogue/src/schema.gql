@@ -76,8 +76,18 @@ type Address {
   barOutlets: [BarOutlet!]!
 }
 
+type PaginatedBarDto {
+  data: [Bar!]!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  itemCount: Int!
+  page: Int!
+  pageCount: Int!
+  pageSize: Int!
+}
+
 type Query {
-  bars: [Bar!]!
+  bars: PaginatedBarDto!
   bar(id: ID!): Bar!
   outlets: [BarOutlet!]!
   outlet(id: ID!): BarOutlet!

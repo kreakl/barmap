@@ -32,6 +32,16 @@ export class BarService {
     });
   }
 
+  mapEntriesToIds(
+    bars: readonly Bar[],
+    barIds: readonly number[],
+    relation: keyof Bar,
+  ) {
+    const entriesMap = new Map(bars.map((bar) => [bar.id, bar[relation]]));
+
+    return barIds.map((id) => entriesMap.get(id));
+  }
+
   async findBarOutletsByBatch(barIds: readonly number[]) {
     const barsWithOutlets = await this.barRepository.find({
       select: {
@@ -48,7 +58,7 @@ export class BarService {
       },
     });
 
-    return barsWithOutlets.map((bar) => bar.outlets);
+    return this.mapEntriesToIds(barsWithOutlets, barIds, 'outlets');
   }
 
   async findBarTypesByBatch(barIds: readonly number[]) {
@@ -62,11 +72,11 @@ export class BarService {
       },
     });
 
-    return barsWithTypes.map((bar) => bar.types);
+    return this.mapEntriesToIds(barsWithTypes, barIds, 'types');
   }
 
   async findBarFranchiseByBatch(barIds: readonly number[]) {
-    const barsWithFranchises = await this.barRepository.find({
+    const barsWithFranchise = await this.barRepository.find({
       select: {
         id: true,
       },
@@ -76,6 +86,6 @@ export class BarService {
       },
     });
 
-    return barsWithFranchises.map((bar) => bar.franchise);
+    return this.mapEntriesToIds(barsWithFranchise, barIds, 'franchise');
   }
 }

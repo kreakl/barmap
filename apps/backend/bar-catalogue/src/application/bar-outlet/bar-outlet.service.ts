@@ -20,6 +20,16 @@ export class BarOutletService {
     });
   }
 
+  mapEntriesToIds(
+    outlets: readonly BarOutlet[],
+    outletsIds: readonly number[],
+    relation: keyof BarOutlet,
+  ) {
+    const entriesMap = new Map(outlets.map((bar) => [bar.id, bar[relation]]));
+
+    return outletsIds.map((id) => entriesMap.get(id));
+  }
+
   async findOutletAddressByBatch(outletIds: readonly number[]) {
     const outletsWithAddress = await this.outletRepository.find({
       select: {
@@ -31,7 +41,7 @@ export class BarOutletService {
       },
     });
 
-    return outletsWithAddress.map((outlet) => outlet.address);
+    return this.mapEntriesToIds(outletsWithAddress, outletIds, 'address');
   }
 
   async findOutletBarByBatch(outletIds: readonly number[]) {
@@ -45,7 +55,7 @@ export class BarOutletService {
       },
     });
 
-    return outletsWithBar.map((outlet) => outlet.bar);
+    return this.mapEntriesToIds(outletsWithBar, outletIds, 'bar');
   }
 
   async findOutletPhotosByBatch(outletIds: readonly number[]) {
@@ -59,6 +69,6 @@ export class BarOutletService {
       },
     });
 
-    return outletPhotos.map((outlet) => outlet.photos);
+    return this.mapEntriesToIds(outletPhotos, outletIds, 'photos');
   }
 }
