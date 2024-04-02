@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Bar } from './bar.entity';
 import { BarTypeCategory } from './bar-type-category.entity';
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 @Entity('bar_types')
@@ -20,6 +20,7 @@ export class BarType {
   @Column()
   name: string;
 
+  @HideField()
   @ManyToMany(() => Bar, (bar) => bar.types)
   bars: Bar[];
 

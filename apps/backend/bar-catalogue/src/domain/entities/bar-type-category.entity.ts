@@ -12,6 +12,7 @@ export class BarTypeCategory {
   @Column({ unique: true })
   name: string;
 
+  @Field({ name: 'types' })
   @OneToMany(() => BarType, (type) => type.category)
   barTypes: BarType[];
 }

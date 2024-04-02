@@ -11,6 +11,7 @@ import * as process from 'process';
 import { AppConfig } from '@catalogue/config';
 import { TestModule } from '@catalogue/infrastructure/tests/test.module';
 import { BarOutletModule } from '@catalogue/application/bar-outlet/bar-outlet.module';
+import { CategoryModule } from '@catalogue/application/category/category.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { BarOutletModule } from '@catalogue/application/bar-outlet/bar-outlet.mo
     }),
     BarModule,
     BarOutletModule,
+    CategoryModule,
   ],
 })
 export class AppModule {}

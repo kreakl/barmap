@@ -12,14 +12,13 @@ scalar CountryCode
 
 type BarTypeCategory {
   id: ID!
+  types: [BarType!]!
   name: String!
-  barTypes: [BarType!]!
 }
 
 type BarType {
   id: ID!
   name: String!
-  bars: [Bar!]!
   category: BarTypeCategory!
 }
 
@@ -101,6 +100,7 @@ type Query {
   bar(id: ID!): Bar!
   outlets(order: Order! = ASC, page: Int! = 1, pageSize: Int! = 10): PaginatedBarOutletDto!
   outlet(id: ID!): BarOutlet!
+  barCategories: [BarTypeCategory!]!
 }
 
 enum Order {
