@@ -1,4 +1,4 @@
-import { Expose, Type } from 'class-transformer';
+import { Type } from 'class-transformer';
 import { IsEnum, IsInt, IsOptional, Max, Min } from 'class-validator';
 import { ArgsType, Field, Int, registerEnumType } from '@nestjs/graphql';
 
@@ -34,8 +34,14 @@ export class PaginatedQueryParametersDto {
   @IsOptional()
   readonly pageSize?: number = 10;
 
-  @Expose()
   get skip(): number {
     return ((this.page ?? 1) - 1) * (this.pageSize ?? 10);
+  }
+
+  constructor(params: Partial<Omit<PaginatedQueryParametersDto, 'skip'>> = {}) {
+    const { order = Order.ASC, page = 1, pageSize = 10 } = params;
+    this.order = order;
+    this.page = page;
+    this.pageSize = pageSize;
   }
 }

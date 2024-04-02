@@ -1,7 +1,7 @@
 import { PaginatedQueryParametersDto } from './paginated-query-parameters.dto';
 
 export interface PaginatedDtoParameters {
-  paginatedQueryDto: PaginatedQueryParametersDto;
+  paginatedParams: Partial<PaginatedQueryParametersDto>;
   itemCount: number;
 }
 

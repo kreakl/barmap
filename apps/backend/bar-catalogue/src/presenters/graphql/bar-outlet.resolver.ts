@@ -14,10 +14,8 @@ import {
 import { Address, Bar, BarOutlet, Photo } from '@catalogue/domain/entities';
 import { BarOutletService } from '@catalogue/application/bar-outlet/bar-outlet.service';
 import { ParseIntPipe } from '@nestjs/common';
-import {
-  PaginatedBarOutletDto,
-  PaginatedQueryParams,
-} from '@catalogue/presenters/graphql/dto';
+import { PaginatedBarOutletDto } from '@catalogue/presenters/graphql/dto';
+import { BarOutletQueryArgs } from '@catalogue/presenters/graphql/dto/bar-outlet/query-bar-outlet.args';
 
 @Resolver(() => BarOutlet)
 export class BarOutletResolver {
@@ -29,8 +27,8 @@ export class BarOutletResolver {
   ) {}
 
   @Query(() => PaginatedBarOutletDto, { name: 'outlets' })
-  async findAll(@Args() queryParams: PaginatedQueryParams) {
-    const paginatedOutlets = await this.outletService.findAll(queryParams);
+  async findAll(@Args() outletParams: BarOutletQueryArgs) {
+    const paginatedOutlets = await this.outletService.findAll(outletParams);
 
     return new PaginatedBarOutletDto(paginatedOutlets);
   }

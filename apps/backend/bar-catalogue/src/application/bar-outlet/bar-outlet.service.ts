@@ -2,7 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Address, Bar, BarOutlet, Photo } from '@catalogue/domain/entities';
 import { In, Repository } from 'typeorm';
-import { PaginatedDto, PaginatedQueryParametersDto } from '@bar-map/shared';
+import { PaginatedDto } from '@bar-map/shared';
+import { BarOutletQuery } from '@catalogue/application/bar-outlet/ports/bar-outlet.query';
+import { isEmpty } from 'lodash';
 
 @Injectable()
 export class BarOutletService {
@@ -11,19 +13,32 @@ export class BarOutletService {
     private readonly outletRepository: Repository<BarOutlet>,
   ) {}
 
-  async findAll(
-    paginatedQueryDto: PaginatedQueryParametersDto = new PaginatedQueryParametersDto(),
-  ) {
-    const { skip, pageSize, order } = paginatedQueryDto;
-    const [bars, itemCount] = await this.outletRepository.findAndCount({
-      skip,
-      take: pageSize,
-      order: {
-        id: order,
-      },
-    });
+  async findAll(outletQueryParams: BarOutletQuery) {
+    const { skip, typeIds, ...paginatedParams } = outletQueryParams;
+    const { pageSize, order } = paginatedParams;
 
-    return new PaginatedDto(bars, { itemCount, paginatedQueryDto });
+    const queryBuilder = this.outletRepository
+      .createQueryBuilder('outlet')
+      .skip(skip)
+      .take(pageSize)
+      .orderBy('outlet.id', order);
+
+    if (typeIds && !isEmpty(typeIds)) {
+      queryBuilder
+        .leftJoin('outlet.bar', 'bar')
+        .leftJoin('bar.types', 'type')
+        .groupBy('outlet.id')
+        .having(
+          `array_agg(type.id)::INTEGER[] @> ARRAY[:...typeIds]::INTEGER[]`,
+          {
+            typeIds: typeIds,
+          },
+        );
+    }
+
+    const [outlets, itemCount] = await queryBuilder.getManyAndCount();
+
+    return new PaginatedDto(outlets, { itemCount, paginatedParams });
   }
 
   async findById(id: number) {

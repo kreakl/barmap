@@ -22,11 +22,11 @@ export class PaginatedDto<T> implements IPaginatedType<T> {
 
   constructor(
     data: T[],
-    { paginatedQueryDto, itemCount }: PaginatedDtoParameters,
+    { paginatedParams, itemCount }: PaginatedDtoParameters,
   ) {
     this.data = data;
-    this.page = paginatedQueryDto.page ?? 1;
-    this.pageSize = paginatedQueryDto.pageSize ?? 10;
+    this.page = paginatedParams.page ?? 1;
+    this.pageSize = paginatedParams.pageSize ?? 10;
     this.totalCount = itemCount;
     this.pageCount = Math.ceil(this.totalCount / this.pageSize);
     this.hasPreviousPage = this.page > 1;

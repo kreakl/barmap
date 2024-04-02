@@ -19,10 +19,8 @@ import {
   OutletsByBarLoader,
   TypesByBarLoader,
 } from '@catalogue/presenters/graphql/data-loaders/bar';
-import {
-  PaginatedBarDto,
-  PaginatedQueryParams,
-} from '@catalogue/presenters/graphql/dto';
+import { PaginatedBarDto } from '@catalogue/presenters/graphql/dto';
+import { BarQueryArgs } from '@catalogue/presenters/graphql/dto/bar/query-bar.args';
 
 @Resolver(() => Bar)
 export class BarResolver {
@@ -34,7 +32,7 @@ export class BarResolver {
   ) {}
 
   @Query(() => PaginatedBarDto, { name: 'bars' })
-  async findAll(@Args() queryParams: PaginatedQueryParams) {
+  async findAll(@Args() queryParams: BarQueryArgs) {
     const paginatedBars = await this.barService.findAll(queryParams);
 
     return new PaginatedBarDto(paginatedBars);
