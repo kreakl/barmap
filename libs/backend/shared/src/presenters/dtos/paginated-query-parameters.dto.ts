@@ -14,19 +14,19 @@ registerEnumType(Order, {
 // TODO: Make class not tied to concrete representation(REST, GRAPHQL)
 @ArgsType()
 export class PaginatedQueryParametersDto {
-  @Field(() => Order, { defaultValue: Order.ASC })
+  @Field(() => Order, { defaultValue: Order.ASC, nullable: true })
   @IsEnum(Order)
   @IsOptional()
   readonly order?: Order = Order.ASC;
 
-  @Field(() => Int, { defaultValue: 1 })
+  @Field(() => Int, { defaultValue: 1, nullable: true })
   @Type(() => Number)
   @IsInt()
   @Min(1)
   @IsOptional()
   readonly page?: number = 1;
 
-  @Field(() => Int, { defaultValue: 10 })
+  @Field(() => Int, { defaultValue: 10, nullable: true })
   @Type(() => Number)
   @IsInt()
   @Min(1)
