@@ -1,7 +1,7 @@
 {
   "name": "bar-catalogue",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/bar-map-backend/bar-catalogue/src",
+  "sourceRoot": "apps/backend/bar-catalogue/src",
   "projectType": "application",
   "targets": {
     "serve": {

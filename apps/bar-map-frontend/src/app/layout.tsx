@@ -1,4 +1,6 @@
 import '../global.css';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { ApolloWrapper } from '@front-main/shared/api/graphql/apollo-wrapper';
 
 export const metadata = {
   title: 'Welcome to bar-map-frontend',
@@ -12,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ApolloWrapper>{children}</ApolloWrapper>
+      </body>
     </html>
   );
 }

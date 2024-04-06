@@ -6,37 +6,34 @@ import {
 } from 'react-icons/bs';
 import { useControllableState } from '@front-main/shared/lib';
 import { tv, VariantProps } from 'tailwind-variants';
-import { IconType } from 'react-icons';
+import React, { ReactNode } from 'react';
 
 type BookMarkToggleButtonProps = {
   value?: boolean;
   defaultValue?: boolean;
-  bookmarkIcon?: IconType;
-  undoBookmarkIcon?: IconType;
+  bookmarkIcon?: ReactNode;
+  undoBookmarkIcon?: ReactNode;
   onChange?: (value: boolean) => void;
   variants?: ButtonVariants;
 };
 
 export const bookmarkButtonStyles = tv({
-  base: 'text-white',
+  base: 'text-zinc-400 outline outline-2 outline-gray-200',
   variants: {
     size: {
-      md: 'p-3',
+      md: 'p-2',
     },
     shape: {
-      rounded: {
-        base: 'rounded-full',
-      },
+      rounded: 'rounded-full',
     },
     color: {
-      green: {
-        base: 'accent-green-300',
-      },
+      green: 'hover:bg-green-500 hover:text-white hover:outline-none',
     },
   },
   defaultVariants: {
     color: 'green',
     size: 'md',
+    shape: 'rounded',
   },
 });
 
@@ -53,8 +50,9 @@ export function BookmarkToggleButton({
 
   return (
     <button onClick={onClick} className={bookmarkButtonStyles(variants)}>
-      isToggled ? (bookmarkIcon || <BookmarkUntoggle />) : (undoBookmarkIcon ||{' '}
-      <BookmarkToggle />)
+      {isToggled
+        ? bookmarkIcon || <BookmarkUntoggle className="h-4 w-4 stroke-1" />
+        : undoBookmarkIcon || <BookmarkToggle className="h-4 w-4 stroke-1" />}
     </button>
   );
 }

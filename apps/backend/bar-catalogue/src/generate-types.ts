@@ -5,10 +5,9 @@ const definitionsFactory = new GraphQLDefinitionsFactory();
 definitionsFactory.generate({
   typePaths: ['./**/*.graphql', './**/*.gql'],
   path: join(process.cwd(), 'graphql-types.ts'),
-  outputAs: 'class',
   emitTypenameField: true,
   watch: true,
-  skipResolverArgs: true,
+  skipResolverArgs: false,
   defaultTypeMapping: {
     ID: 'number',
   },

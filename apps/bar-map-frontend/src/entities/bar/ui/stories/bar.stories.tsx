@@ -5,7 +5,7 @@ import {
   BarCardProps,
 } from '../bar-card.ui';
 import { type Meta, type StoryObj } from '@storybook/react';
-import barImage from './img.png';
+import barImage from '@front-main/public/storybook/bar-img.png';
 
 const meta: Meta<typeof BarCard> = {
   component: BarCard,

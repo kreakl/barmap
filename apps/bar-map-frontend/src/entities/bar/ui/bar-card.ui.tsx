@@ -1,11 +1,9 @@
-'use server';
-
 import Image, { ImageProps } from 'next/image';
 import {
   PiMapPinThin as BarAddressIcon,
   PiWine as BarCategoryIcon,
 } from 'react-icons/pi';
-import { MdCurrencyRuble as BarCheckIcon } from 'react-icons/md';
+import { MdCurrencyRuble as BarBillIcon } from 'react-icons/md';
 
 import {
   barCardSlots,
@@ -41,7 +39,7 @@ export function BarCard({
         )}
         <div className={_header()}>
           <div className={_title()}>{title}</div>
-          {headerActionSlot && headerActionSlot}
+          {headerActionSlot && <div>{headerActionSlot}</div>}
         </div>
         <div className={_description()}>{description}</div>
         {children}
@@ -51,34 +49,40 @@ export function BarCard({
 }
 
 export type BarCardInfoProps = {
-  address: string;
-  categoryList: string[];
-  checkSum: string | number;
+  address?: string;
+  categoryList?: string[];
+  billSum?: string | number;
   variant?: BarCardVariants;
 };
 
 export function BarCardInfo({
   address,
   categoryList,
-  checkSum,
+  billSum,
   variant,
 }: BarCardInfoProps) {
   const { _info, _infoText, _infoContainer } = barCardSlots(variant);
 
   return (
     <div className={_infoContainer()}>
-      <div className={_info()}>
-        <BarAddressIcon />
-        <div className={_infoText()}>{address}</div>
-      </div>
-      <div className={_info()}>
-        <BarCategoryIcon />
-        <div className={_infoText()}>{categoryList.join(', ')}</div>
-      </div>
-      <div className={_info()}>
-        <BarCheckIcon />
-        <div className={_infoText()}>{checkSum}</div>
-      </div>
+      {address && (
+        <div className={_info()}>
+          <BarAddressIcon />
+          <div className={_infoText()}>{address}</div>
+        </div>
+      )}
+      {categoryList && (
+        <div className={_info()}>
+          <BarCategoryIcon />
+          <div className={_infoText()}>{categoryList.join(', ')}</div>
+        </div>
+      )}
+      {billSum && (
+        <div className={_info()}>
+          <BarBillIcon />
+          <div className={_infoText()}>{billSum}</div>
+        </div>
+      )}
     </div>
   );
 }

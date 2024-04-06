@@ -96,9 +96,9 @@ type PaginatedBarDto {
 }
 
 type Query {
-  bars(order: Order! = ASC, page: Int! = 1, pageSize: Int! = 10, typeIds: [Int!]): PaginatedBarDto!
+  bars(order: Order = ASC, page: Int = 1, pageSize: Int = 10, typeIds: [Int!]): PaginatedBarDto!
   bar(id: ID!): Bar!
-  outlets(order: Order! = ASC, page: Int! = 1, pageSize: Int! = 10, typeIds: [Int!]): PaginatedBarOutletDto!
+  outlets(order: Order = ASC, page: Int = 1, pageSize: Int = 10, typeIds: [Int!]): PaginatedBarOutletDto!
   outlet(id: ID!): BarOutlet!
   barCategories: [BarTypeCategory!]!
 }

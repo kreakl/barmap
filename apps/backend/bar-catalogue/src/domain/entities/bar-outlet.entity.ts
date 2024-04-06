@@ -9,8 +9,8 @@ import {
 import { Address } from './address.entity';
 import { Bar } from './bar.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { GraphQLPhoneNumber } from 'graphql-scalars';
 import { Photo } from '@catalogue/domain/entities/photo.entity';
+import { GraphQLPhoneNumber } from 'graphql-scalars';
 
 @ObjectType()
 @Entity('bar_outlets')
@@ -37,7 +37,7 @@ export class BarOutlet {
   bar: Bar;
 
   @Field(() => GraphQLPhoneNumber)
-  @Column('varchar', { length: 12 })
+  @Column('varchar', { length: 15 })
   phoneNumber: string;
 
   @Column('text', {})
