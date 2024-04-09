@@ -2,7 +2,7 @@ import { gql, TypedDocumentNode } from '@apollo/client';
 import {
   OutletsData,
   OutletsQueryVariables,
-} from '@front-main/shared/api';
+} from '@front-main/shared/api/graphql/models';
 
 export const GET_ALL_OUTLETS_QUERY: TypedDocumentNode<
   OutletsData,

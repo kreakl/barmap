@@ -2,7 +2,7 @@ import { gql, TypedDocumentNode } from '@apollo/client';
 import {
   OutletsQueryVariables,
   PaginatedBarOutletDto,
-} from '@front-main/shared/api';
+} from '@front-main/shared/api/graphql/models';
 
 type OutletsPageCountData = {
   outlets: Pick<PaginatedBarOutletDto, 'pageCount'>;

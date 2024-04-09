@@ -1,9 +1,10 @@
 import { BarCard, BarCardInfo } from '@front-main/entities/bar/ui';
-import { getClient, Order } from '@front-main/shared/api';
+import { getClient } from '@front-main/shared/api/graphql/apollo-client';
 import { GET_ALL_OUTLETS_QUERY } from '@front-main/widgets/bar-card-list/api/get-all-outlets.query';
-import { Nullable } from '@front-main/shared/models';
-import { ImageGrid } from '@front-main/shared/ui';
+import { Nullable } from '@front-main/shared/model/types';
+import { ImageGrid } from '@front-main/shared/ui/image-grid';
 import { BookmarkBar } from '@front-main/features/bookmark-bar/ui/bookmark-bar.ui';
+import { Order } from '@front-main/shared/api/graphql/models';
 
 export type BarCardListProps = {
   order?: Order;

@@ -1,3 +1,5 @@
+'use client';
+
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import { isEmpty } from 'lodash';

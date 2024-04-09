@@ -7,6 +7,15 @@ const { composePlugins, withNx } = require('@nx/next');
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/:lng',
+        destination: '/:lng*/spb',
+        permanent: false,
+      }
+    ]
+  },
   images: {
     remotePatterns: [
       {

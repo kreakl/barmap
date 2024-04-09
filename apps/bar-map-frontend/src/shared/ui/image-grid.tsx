@@ -1,6 +1,6 @@
+import { clsx } from 'clsx';
 import Image, { ImageProps } from 'next/image';
 import Skeleton from 'react-loading-skeleton';
-import { clsx } from 'clsx';
 
 type ImageGridProps = {
   imageUrls: ImageProps['src'][];

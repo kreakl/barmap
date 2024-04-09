@@ -1,12 +1,12 @@
 'use client';
 
+import React, { ReactNode } from 'react';
 import {
   BsBookmarkPlus as BookmarkToggle,
   BsBookmarkCheck as BookmarkUntoggle,
 } from 'react-icons/bs';
-import { useControllableState } from '@front-main/shared/lib';
 import { tv, VariantProps } from 'tailwind-variants';
-import React, { ReactNode } from 'react';
+import { useControllableState } from '@front-main/shared/lib/use-controllable-state.hook';
 
 type BookMarkToggleButtonProps = {
   value?: boolean;
