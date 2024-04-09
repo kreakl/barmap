@@ -1,3 +1,5 @@
+'use client';
+
 import { SetStateAction, useCallback, useRef, useState } from 'react';
 
 export type UseControllableStateProps<T> = {

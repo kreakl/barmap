@@ -1,10 +1,12 @@
-import { getClient } from '@front-main/shared/api';
+import { getClient } from '@front-main/shared/api/graphql/apollo-client';
 import { GET_OUTLETS_PAGES_COUNT } from '@front-main/pages/main/get-outlets-pages.query';
 import { Suspense } from 'react';
-import { BarCardListSkeleton } from '@front-main/widgets/bar-card-list/ui/bar-card-list-skeleton.ui';
-import { BarCardList } from '@front-main/widgets/bar-card-list/ui/bar-card-list.ui';
-import { SearchParams } from '@front-main/shared/models';
-import { Pagination } from '@front-main/features/pagination/ui/pagination.ui';
+import { SearchParams } from '@front-main/shared/model/types';
+import { Pagination } from '@front-main/features/pagination';
+import {
+  BarCardList,
+  BarCardListSkeleton,
+} from '@front-main/widgets/bar-card-list';
 
 export type MainPageProps = {
   searchParams: SearchParams;
@@ -24,7 +26,7 @@ export async function MainPage({ searchParams: { page } }: MainPageProps) {
   });
 
   return (
-    <div className="mx-auto w-full md:w-3/4 lg:w-1/2 2xl:w-1/3">
+    <div className="4xl:w-1/3 mx-auto w-full md:w-3/4 lg:w-1/2 2xl:w-2/5">
       <Suspense key={page} fallback={<BarCardListSkeleton />}>
         <BarCardList pageSize={PAGE_SIZE} currentPage={Number(page) || 1} />
       </Suspense>
