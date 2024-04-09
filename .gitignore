@@ -45,7 +45,7 @@ Thumbs.db
 .next
 out
 
-.development.env
+*.env
 
 
 storybook-static
