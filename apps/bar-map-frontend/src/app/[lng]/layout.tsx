@@ -1,10 +1,9 @@
 import '../../global.css';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { dir } from 'i18next';
-import { Header } from '@front-main/widgets/header';
 import { ApolloWrapper } from '@front-main/shared/api/graphql/apollo-wrapper';
 import { LocaleProvider } from '@front-main/shared/model/i18n/locale-context';
 import { languages } from '@front-main/shared/model/i18n/settings';
+import { Header } from '@front-main/widgets/header';
 
 export const metadata = {
   title: 'Welcome to bar-map-frontend',
